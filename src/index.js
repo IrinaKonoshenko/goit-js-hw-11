@@ -43,11 +43,9 @@ async function fetchImages(value) {
     page: page,
   });
   try {
-    const res = await Axios.get(`${URL}?${params}`)
+    const res = await Axios.get(`${URL}?${params}`);
     if (page === 1) {
-      Notiflix.Notify.success(
-        `Hooray! We found ${res.data.totalHits} images.`
-      );
+      Notiflix.Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
     }
     if (res && res?.data && res?.data?.total > 0) {
       renderImages(res.data.hits);
@@ -66,8 +64,8 @@ async function fetchImages(value) {
         'Sorry, there are no images matching your search query. Please try again.'
       );
     }
-  } catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   } finally {
     loadmore.removeAttribute('disabled');
   }
@@ -115,7 +113,6 @@ function renderImages(images) {
   });
   lightbox.refresh();
 }
-
 
 // document.addEventListener('scroll', () => {
 //   const scrollTop = document.body.scrollTop
