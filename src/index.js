@@ -44,16 +44,18 @@ async function fetchImages(value) {
   });
   try {
     const res = await Axios.get(`${URL}?${params}`);
-    if (page === 1) {
-      Notiflix.Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
-    }
     if (res && res?.data && res?.data?.total > 0) {
+      if (page === 1) {
+        Notiflix.Notify.success(
+          `Hooray! We found ${res.data.totalHits} images.`
+        );
+      }
       renderImages(res.data.hits);
       total = res.data.totalHits;
       page++;
       if (total > page * 40) {
         loadmore.classList.remove('hidden');
-      } else {
+      } else if (total > 40) {
         loadmore.classList.add('hidden');
         Notiflix.Notify.success(
           "We're sorry, but you've reached the end of search results."
