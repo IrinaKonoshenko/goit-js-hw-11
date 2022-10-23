@@ -50,17 +50,17 @@ async function fetchImages(value) {
           `Hooray! We found ${res.data.totalHits} images.`
         );
       }
-      renderImages(res.data.hits);
       total = res.data.totalHits;
-      page++;
       if (total > page * 40) {
         loadmore.classList.remove('hidden');
-      } else if (total > 40) {
-        loadmore.classList.add('hidden');
+      } else {
         Notiflix.Notify.success(
           "We're sorry, but you've reached the end of search results."
         );
+        loadmore.classList.add('hidden');
       }
+      renderImages(res.data.hits);
+      
     } else {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -70,6 +70,7 @@ async function fetchImages(value) {
     console.log(error);
   } finally {
     loadmore.removeAttribute('disabled');
+    page++;
   }
 }
 
