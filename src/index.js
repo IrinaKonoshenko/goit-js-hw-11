@@ -60,7 +60,6 @@ async function fetchImages(value) {
         loadmore.classList.add('hidden');
       }
       renderImages(res.data.hits);
-      
     } else {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
